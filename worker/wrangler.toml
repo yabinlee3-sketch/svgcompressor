@@ -1,0 +1,9 @@
+name = "svg-verify"
+main = "src/index.js"
+account_id = "4db5eb343e7a95091eaa15fe53d20526"
+compatibility_date = "2026-07-10"
+compatibility_flags = ["nodejs_compat"]
+
+kv_namespaces = [
+  { binding = "SVG_PRO_KEYS", id = "f00e4921c00a4d4db0f6f64ba18f4f51" }
+]

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVG Compressor - Free Online SVG Minifier & Optimizer</title>
+<meta name="description" content="Compress and optimize SVG files online. 100% browser-based — files never leave your device. Free SVG optimizer with live preview.">
+<meta name="keywords" content="svg compressor, svg optimizer, svg minifier, compress svg, optimize svg file">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f0f13;--bg-card:#1a1a24;--bg-hover:#252533;--border:#2a2a3a;--text:#e8e8f0;--text-muted:#8888a0;--accent:#6c5ce7;--accent-hover:#7c6cf7;--green:#00d68f;--orange:#ffa726;--radius:12px}
+.light{--bg:#f5f5fa;--bg-card:#fff;--bg-hover:#eeedf5;--border:#dcdce6;--text:#1a1a2e;--text-muted:#6b6b80}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:.3s}
+.container{max-width:960px;margin:0 auto;padding:24px 20px}
+.header{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:40px}
+.logo{font-size:1.3rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.logo span{background:var(--accent);color:#fff;padding:2px 8px;border-radius:6px;font-size:.75rem}
+.theme-btn{background:var(--bg-card);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.85rem}
+.theme-btn:hover{background:var(--bg-hover)}
+.hero{text-align:center;margin-bottom:48px}
+.hero h1{font-size:2.5rem;font-weight:800;line-height:1.2;margin-bottom:12px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--text-muted);font-size:1.1rem;max-width:600px;margin:0 auto;line-height:1.6}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px}
+.feature{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:.2s}
+.feature:hover{transform:translateY(-2px)}
+.feature .icon{font-size:1.5rem;margin-bottom:8px}
+.feature h3{font-size:.9rem;margin-bottom:4px}
+.feature p{font-size:.8rem;color:var(--text-muted)}
+.drop-zone{background:var(--bg-card);border:2px dashed var(--border);border-radius:var(--radius);padding:48px 24px;text-align:center;cursor:pointer;transition:.3s;margin-bottom:24px}
+.drop-zone:hover,.drop-zone.dragover{border-color:var(--accent);background:var(--bg-hover)}
+.drop-zone .icon{font-size:3rem;margin-bottom:12px}
+.drop-zone h2{font-size:1.1rem;margin-bottom:8px}
+.drop-zone p{color:var(--text-muted);font-size:.9rem}
+.drop-zone .hint{margin-top:12px;font-size:.8rem;color:var(--text-muted)}
+.drop-zone input{display:none}
+.drop-zone .btn-select{display:inline-block;margin-top:16px;background:var(--accent);color:#fff;border:none;padding:10px 28px;border-radius:8px;font-size:.95rem;cursor:pointer}
+.drop-zone .btn-select:hover{background:var(--accent-hover)}
+.results{display:none}
+.results.show{display:block}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center}
+.stat-card .label{font-size:.8rem;color:var(--text-muted);margin-bottom:4px}
+.stat-card .value{font-size:1.5rem;font-weight:700}
+.stat-card .value.green{color:var(--green)}
+.stat-card .value.orange{color:var(--orange)}
+.file-list{margin-bottom:16px}
+.file-item{display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin-bottom:8px;font-size:.9rem;cursor:pointer}
+.file-item .name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-item .savings{font-weight:600;font-size:.85rem}
+.file-item .savings.green{color:var(--green)}
+.file-item .status{font-size:.8rem;color:var(--text-muted)}
+.preview-area{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.preview-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.preview-card .preview-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);font-size:.85rem;font-weight:600}
+.preview-card .preview-header .size{font-weight:400;color:var(--text-muted);font-size:.8rem}
+.preview-card .preview-body{padding:24px;min-height:200px;display:flex;align-items:center;justify-content:center;background:repeating-conic-gradient(rgba(128,128,128,0.05) 0% 25%,transparent 0% 50%) 0 0/20px 20px}
+.preview-card .preview-body svg{max-width:100%;max-height:200px}
+.preview-card .preview-body .placeholder{color:var(--text-muted);font-size:.9rem}
+.actions{display:flex;gap:12px;margin-bottom:32px}
+.actions button{flex:1;padding:14px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:.2s;border:none}
+.btn-download{background:var(--accent);color:#fff}
+.btn-download:hover{background:var(--accent-hover)}
+.btn-reset{background:var(--bg-card);color:var(--text);border:1px solid var(--border)!important}
+.paid-teaser{background:linear-gradient(135deg,var(--accent),#a78bfa);border-radius:var(--radius);padding:32px;text-align:center;color:#fff;margin-bottom:32px}
+.paid-teaser h3{font-size:1.2rem;margin-bottom:8px}
+.paid-teaser p{opacity:.9;font-size:.9rem;margin-bottom:16px}
+.paid-teaser .features-list{display:flex;justify-content:center;gap:24px;margin-bottom:16px;flex-wrap:wrap}
+.paid-teaser .features-list span{font-size:.85rem}
+.paid-teaser .btn-paid{background:#fff;color:var(--accent);border:none;padding:12px 32px;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer}
+.paid-teaser .btn-paid:hover{transform:scale(1.05)}
+.footer{text-align:center;padding:32px 0;color:var(--text-muted);font-size:.85rem;border-top:1px solid var(--border)}
+.footer a{color:var(--accent);text-decoration:none}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:12px 24px;font-size:.9rem;box-shadow:0 4px 24px rgba(0,0,0,.3);opacity:0;transition:.3s;pointer-events:none;z-index:100}
+.toast.show{opacity:1}
+@media(max-width:640px){.hero h1{font-size:1.8rem}.features,.stats,.preview-area{grid-template-columns:1fr}.paid-teaser .features-list{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header class="header">
+<div class="logo">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+SVG Compressor <span>BETA</span>
+</div>
+<button class="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<section class="hero">
+<h1>Compress SVGs Instantly<br><span>100% in Your Browser</span></h1>
+<p>Your files never leave your device. No uploads, no servers, no privacy concerns. Drag, drop, and download optimized SVGs.</p>
+</section>
+<section class="features">
+<div class="feature"><div class="icon">🔒</div><h3>100% Private</h3><p>All processing happens locally. Zero uploads.</p></div>
+<div class="feature"><div class="icon">⚡</div><h3>Lightning Fast</h3><p>Optimize SVGs in milliseconds.</p></div>
+<div class="feature"><div class="icon">📉</div><h3>Up to 70% Smaller</h3><p>Remove metadata, empty groups, redundancy.</p></div>
+</section>
+<div class="drop-zone" id="dropZone">
+<div class="icon">📂</div><h2>Drop your SVG files here</h2><p>or click to browse</p>
+<div class="hint">Supports single or multiple SVG files</div>
+<input type="file" id="fileInput" accept=".svg,image/svg+xml" multiple>
+<button class="btn-select" onclick="document.getElementById('fileInput').click()">Select SVGs</button>
+</div>
+<div class="results" id="results">
+<div class="stats" id="statsBar">
+<div class="stat-card"><div class="label">Files</div><div class="value" id="fileCount">0</div></div>
+<div class="stat-card"><div class="label">Total Saved</div><div class="value green" id="totalSaved">0 B</div></div>
+<div class="stat-card"><div class="label">Avg Compression</div><div class="value orange" id="avgCompression">0%</div></div>
+</div>
+<div class="file-list" id="fileList"></div>
+<div class="preview-area" id="previewArea">
+<div class="preview-card"><div class="preview-header"><span>Original</span><span class="size" id="originalSize">0 B</span></div><div class="preview-body" id="originalPreview"><div class="placeholder">Upload an SVG to preview</div></div></div>
+<div class="preview-card"><div class="preview-header"><span>Optimized</span><span class="size" id="optimizedSize">0 B</span></div><div class="preview-body" id="optimizedPreview"><div class="placeholder">Optimized result appears here</div></div></div>
+</div>
+<div class="actions">
+<button class="btn-download" onclick="downloadAll()">⬇ Download All</button>
+<button class="btn-reset" onclick="resetAll()">🔄 Start Over</button>
+</div>
+</div>
+<div class="paid-teaser">
+<h3>🚀 Need More Power?</h3>
+<p>Unlock advanced compression, SVG to JSX, and bulk processing.</p>
+<div class="features-list">
+<span>✅ Batch optimize 50+ files</span><span>✅ SVG → React JSX</span><span>✅ Max compression (SVGO-level)</span>
+</div>
+<button class="btn-paid" onclick="alert('Pro version coming soon! Pay once, use forever.')">✨ Get Pro — $4.99</button>
+</div>
+</div>
+<footer class="footer"><p>Made by <a href="#">SVG Compressor</a> — All processing in your browser. We never see your files.</p></footer>
+<div class="toast" id="toast"></div>
+<script>
+function toggleTheme(){document.body.classList.toggle('light');let b=document.querySelector('.theme-btn');b.textContent=document.body.classList.contains('light')?'☀️ Light':'🌙 Dark'}
+if(window.matchMedia('(prefers-color-scheme:light)').matches){document.body.classList.add('light');document.querySelector('.theme-btn').textContent='☀️ Light'}
+function optimizeSVG(t){let d=new DOMParser().parseFromString(t,'image/svg+xml'),s=d.documentElement;if(s.tagName!=='svg')return{error:'Invalid SVG'}
+let n=new Blob([t]).size,c=0
+function rmComments(e){for(let i=e.childNodes.length-1;i>=0;i--){let ch=e.childNodes[i];if(ch.nodeType===8){e.removeChild(ch);c++}else if(ch.nodeType===1)rmComments(ch)}}
+rmComments(s)
+function rmEmpty(e){for(let ch of[...e.children]){rmEmpty(ch);let h=ch.children.length>0,t=ch.textContent.trim().length>0,a=[...ch.attributes].some(at=>at.name!=='xmlns'&&!at.name.startsWith('xmlns:'));if(!h&&!t&&!a&&ch.parentNode){ch.parentNode.removeChild(ch);c++}}}
+rmEmpty(s)
+let ed=['inkscape','illustrator','sketch','figma','sodipodi','corel']
+function rmEditor(e){if(!e.attributes)return;let rm=[];for(let a of e.attributes){let l=a.localName.toLowerCase(),v=a.value.toLowerCase();if(ed.some(p=>l.startsWith(p)||l.includes(':'+p)))rm.push(a.name)
+if((l==='fill'&&(v==='none'||v==='transparent'||v==='#000'||v==='#000000'))||(l==='stroke'&&v==='none')||(l==='stroke-width'&&(v==='0'||v==='0px'))||(l==='opacity'&&v==='1')||(l==='transform'&&v==='matrix(1,0,0,1,0,0)')||(l==='display'&&v==='inline')||(l==='enable-background')||ed.some(p=>l.includes(p)))rm.push(a.name)}
+for(let n of rm){e.removeAttribute(n);c++}for(let ch of e.children)rmEditor(ch)}
+rmEditor(s)
+function collapse(e){for(let ch of[...e.children])collapse(ch);if(e.tagName==='g'&&e.children.length===1&&e.attributes.length===0){let ch=e.children[0];while(ch.attributes.length>0){let a=ch.attributes[0];e.setAttribute(a.name,a.value);ch.removeAttribute(a.name)}}}
+collapse(s)
+function minColors(e){if(!e.attributes)return;for(let a of e.attributes){let v=a.value.trim().toLowerCase();if(/^#[0-9a-f]{6}$/i.test(v)&&v[1]===v[2]&&v[3]===v[4]&&v[5]===v[6]){a.value='#'+v[1]+v[3]+v[5];c++}}
+for(let ch of e.children)minColors(ch)}
+minColors(s)
+function trimDec(e){if(!e.attributes)return;for(let a of e.attributes){a.value=a.value.replace(/(\d+\.\d{3,})/g,(m)=>{let n=parseFloat(m);return isNaN(n)?m:parseFloat(n.toFixed(2)).toString()})}
+for(let ch of e.children)trimDec(ch)}
+trimDec(s)
+let o=new XMLSerializer().serializeToString(s).replace(/ xmlns=""| xmlns:(\w+)=""/g,'')
+let ns=new Blob([o]).size
+return{original:t,optimized:o,originalSize:n,optimizedSize:ns,saved:n-ns,percent:n>0?Math.round((n-ns)/n*100):0,changes:c}}
+let results=[],cur=0
+const dz=document.getElementById('dropZone'),fi=document.getElementById('fileInput'),rd=document.getElementById('results')
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('dragover')})
+dz.addEventListener('dragleave',()=>dz.classList.remove('dragover'))
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('dragover');handle(e.dataTransfer.files)})
+fi.addEventListener('change',()=>{if(fi.files.length)handle(fi.files)})
+function handle(f){let svgs=[...f].filter(f=>f.type==='image/svg+xml'||f.name.endsWith('.svg'));if(!svgs.length){toast('Please select SVG files only.');return}
+results=[];cur=0
+function read(i){if(i>=svgs.length){toast('Optimized '+results.length+' SVGs!');show();return}
+let r=new FileReader();r.onload=e=>{let o=optimizeSVG(e.target.result);if(o.error)toast(svgs[i].name+': '+o.error);else results.push({name:svgs[i].name,...o});read(i+1)};r.readAsText(svgs[i])}
+read(0)}
+function show(){if(!results.length)return;rd.classList.add('show')
+let to=results.reduce((s,r)=>s+r.originalSize,0),topt=results.reduce((s,r)=>s+r.optimizedSize,0),ts=to-topt,ap=to>0?Math.round(ts/to*100):0
+document.getElementById('fileCount').textContent=results.length
+document.getElementById('totalSaved').textContent=fmt(ts)
+document.getElementById('avgCompression').textContent=ap+'%'
+document.getElementById('fileList').innerHTML=results.map((r,i)=>'<div class="file-item" onclick="preview('+i+')"><span class="name">'+r.name+'</span><span class="savings '+(r.saved>0?'green':'')+'">-'+r.percent+'% ('+fmt(r.saved)+')</span><span class="status">'+fmt(r.originalSize)+' → '+fmt(r.optimizedSize)+'</span></div>').join('')
+preview(0);dz.style.display='none'}
+function preview(i){if(i<0||i>=results.length)return;cur=i;let r=results[i]
+document.getElementById('originalSize').textContent=fmt(r.originalSize)
+document.getElementById('optimizedSize').textContent=fmt(r.optimizedSize)
+document.getElementById('originalPreview').innerHTML=r.original
+document.getElementById('optimizedPreview').innerHTML=r.optimized}
+function downloadAll(){if(!results.length)return
+if(results.length===1){let r=results[0],b=new Blob([r.optimized],{type:'image/svg+xml'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=r.name.replace('.svg','-min.svg');a.click();URL.revokeObjectURL(u)}
+else{for(let r of results){let b=new Blob([r.optimized],{type:'image/svg+xml'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=r.name.replace('.svg','-min.svg');a.click();URL.revokeObjectURL(u)}}
+toast('Downloaded '+results.length+' SVGs!')}
+function resetAll(){results=[];cur=0;rd.classList.remove('show');dz.style.display='';fi.value=''}
+function fmt(b){if(!b)return'0 B';if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(1)+' MB'}
+function toast(m){let t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+</script>
+</body>
+</html>
+*** End of File

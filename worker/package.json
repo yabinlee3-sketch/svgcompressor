@@ -1,0 +1,8 @@
+{
+  "name": "svg-verify",
+  "version": "1.0.0",
+  "description": "License key verification worker for SVG Compressor",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  }
+}

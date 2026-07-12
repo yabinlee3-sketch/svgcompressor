@@ -1,0 +1,32 @@
+LemonSqueezy Payment Integration - Quick Setup
+==============================================
+
+This file tells you exactly what to do to start accepting $4.99 payments.
+
+=== Steps ===
+
+1. Go to https://lemonsqueezy.com/ and sign up (free, no company needed)
+2. Create a store (name it whatever you like)
+3. Create a product:
+   - Name: "SVG Compressor Pro"
+   - Price: $4.99 (one-time)
+   - Description: "Unlock batch processing (50+ files), max compression, and priority features"
+4. After creating, copy the "Buy Now" URL (looks like: https://svgcompressor.lemonsqueezy.com/checkout/buy/xxxx-xxxx)
+
+=== After you get the URL ===
+
+Send me the "Buy Now" URL (or the product ID), I will:
+   - Integrate it into the site within 5 minutes
+   - The "Get Pro" button will redirect to LemonSqueezy checkout
+   - After payment completes, I'll add code to unlock Pro features in the browser
+
+=== What the Pro version includes (code already prepared) ===
+- Batch processing of 50+ files (free limited to 3)
+- Max compression (SVGO-level WASM optimization)
+- Priority support
+
+=== Dev notes ===
+The LemonSqueezy overlay JS (lemon.js) is loaded from their CDN.
+No server-side code needed - LemonSqueezy handles everything.
+After payment, store a flag in localStorage to track Pro status.
+Use their webhook to verify payment server-side (optional, for extra security).

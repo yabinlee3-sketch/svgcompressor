@@ -1,0 +1,21 @@
+{
+  "name": "svgcompressor",
+  "version": "1.0.0",
+  "description": "Online SVG Compressor - Optimize SVG files in your browser, 100% private",
+  "scripts": {
+    "start": "npx serve . -p 8080",
+    "deploy": "npx wrangler pages deploy . --project-name=svgcompressor"
+  },
+  "keywords": [
+    "svg",
+    "compressor",
+    "optimizer",
+    "minifier",
+    "online-tool"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.61.1"
+  }
+}
