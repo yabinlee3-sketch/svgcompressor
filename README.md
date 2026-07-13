@@ -1,4 +1,7 @@
-﻿# SVG Compressor
+﻿[![Deployed on Cloudflare Pages](https://img.shields.io/badge/%E2%98%BC%20Cloudflare%20Pages-Live-6c47ff?logo=cloudflare&logoColor=white)](https://svgcompressor.pages.dev)
+[![Live Demo](https://img.shields.io/badge/demo-svgcompressor.pages.dev-6c5ce7)](https://svgcompressor.pages.dev/)
+
+# SVG Compressor
 
 > **Free online SVG optimizer. 100% browser-based, no uploads needed.**
 
