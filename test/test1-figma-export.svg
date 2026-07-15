@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 100 100">
+  <!-- This is a test comment that should be stripped -->
+  <metadata>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description>Figma export metadata - should be stripped</rdf:Description>
+    </rdf:RDF>
+  </metadata>
+  <title>Test SVG</title>
+  <desc>A test SVG file for compression testing</desc>
+  <defs>
+    <linearGradient id="used-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff6600"/>
+      <stop offset="100%" stop-color="#ff0066"/>
+    </linearGradient>
+    <linearGradient id="unused-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <g id="layer1" inkscape:label="Layer 1" inkscape:groupmode="layer" fill="none">
+    <rect x="10" y="10" width="80" height="80" rx="10" fill="url(#used-grad)"/>
+    <circle cx="50" cy="50" r="30" fill="#ffffff" opacity="1"/>
+    <circle cx="50" cy="50" r="20" fill="#ff6600" fill-opacity="1"/>
+    <g style="display:none">
+      <rect x="0" y="0" width="10" height="10" fill="red"/>
+    </g>
+    <!-- Empty group that should be collapsed -->
+    <g></g>
+  </g>
+</svg>
